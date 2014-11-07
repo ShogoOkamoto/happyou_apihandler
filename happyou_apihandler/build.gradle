@@ -1,0 +1,76 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'happyou_apihandler', 'Implementation-Version': version
+    }
+}
+
+repositories {
+
+	mavenCentral()
+	maven{ url 'http://maven.restlet.com'}
+	
+}
+
+dependencies {
+	
+	compile 'net.htmlparser.jericho:jericho-html:3.3'
+	compile 'net.arnx:jsonic:1.3.0'
+	compile group: 'junit', name: 'junit', version: '4.+'
+	
+          
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+task intro(dependsOn:'build') {
+	println('prc2_main_intro2')
+	project.tasks.getByName('clean').execute()
+	
+	project.tasks.getByName('build').doLast {
+		project.tasks.getByName('copyJars').execute()
+	}
+}
+
+
+task copyJars() << {
+
+	println("copyJars")
+
+	def exceptions = ['org.apache.servicemix.bundles.lucene-3.0.1_2.jar']
+
+	File ddir= file(new File('lib'))
+
+	//delete all first...
+	def collection =  ddir.listFiles()
+	collection.each {it.delete()}
+
+	//copy runtime jar...
+	configurations.compile.each {
+		
+		File file -> println "srcdirfile:" + file.name
+
+		if (exceptions.contains(file.name)) {
+			println("IGNORE:"+file.name)
+		} else {
+			copy {
+				from file
+				into ddir
+			}
+		}
+	}
+}
+
+
+
