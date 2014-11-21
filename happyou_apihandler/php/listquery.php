@@ -14,7 +14,7 @@ if ($cookie==false) {
 
 echo "send query to server..\n";
 
-//send query via API 
+//(1) send query and receive result as $article object via API 
 $query = array('pubdatelast'=>'1000');
 $resultlist = $h->listArticles($query, $cookie);
 
@@ -23,4 +23,15 @@ foreach ($resultlist['articles'] as $article) {
   echo $article['Article']['publishedDate']." : ".$article['Article']['orgname']." : ".$article['Article']['title']."\n";
   echo "---\n";
 }
+
+//(2) send query and receive result as json text via API
+$json = $h->sendQuery($query, $cookie);
+
+//print result
+echo $json;
+
+
+
+
+
 ?>
