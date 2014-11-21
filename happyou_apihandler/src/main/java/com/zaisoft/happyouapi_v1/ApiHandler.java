@@ -30,15 +30,33 @@ import com.zaisoft.happyouapi_v1.model.Articles;
  */
 public class ApiHandler {
 
+	/**
+	 * path to login dialog
+	 */
 	public static final String PATH2LOGIN = "https://zaisoft.sakura.ne.jp/happyou/webappv1/authake/user/login";
+
+	/**
+	 * toppage of api
+	 */
 	public static final String PATH2API_TOPPAGE = "https://zaisoft.sakura.ne.jp/happyou/webappv1/index.php";
+
+	/**
+	 * path to json response
+	 */
 	public static final String PATH2API_JSON = "https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.json";
+
+	/**
+	 * path to rss response
+	 */
 	public static final String PATH2API_RSS = "https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.rss";
 
-	/*
-	 * url contains form to login
+	/**
+	 * username to login
 	 */
 	private String username;
+	/**
+	 * password to login
+	 */
 	private String password;
 
 	/**
@@ -79,7 +97,6 @@ public class ApiHandler {
 			query.add("pubdatelast=256");
 			Articles articles = s.listArticles(query);
 
-		
 			articles.articles.forEach(ar -> {
 				System.out.println(ar.Article.title);
 			});
@@ -200,6 +217,12 @@ public class ApiHandler {
 		return null;
 	}
 
+	/**
+	 * create query from parameter list
+	 * @param data
+	 * @param encodeManually
+	 * @return
+	 */
 	private String createQuery2str(List<String> data, boolean encodeManually) {
 
 		StringBuffer sb = new StringBuffer();
@@ -424,6 +447,7 @@ public class ApiHandler {
 	}
 
 	/**
+	 * remove some character from head and tail.
 	 * "hoge"->hoge
 	 * 
 	 * @param s

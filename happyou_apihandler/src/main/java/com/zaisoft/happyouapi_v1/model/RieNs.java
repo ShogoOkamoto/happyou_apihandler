@@ -3,7 +3,7 @@ package com.zaisoft.happyouapi_v1.model;
 import java.util.Date;
 
 /**
- * Pojo model class of Article-Newssite relationships. equivalent to RieNS class in cake PHP<br>
+ * Pojo model class of Article-namespace relationships. equivalent to RieNS class in cake PHP<br>
  * 
  * @author shogo
  * 
@@ -14,7 +14,7 @@ public class RieNs {
 	public long id;
 	// article'id
 	public long rieid;
-	// nsid(=newssitetitlehash)
+	// nsid(=namespacetitlehash)
 	public int ns;
 	// news value
 	public int val;
