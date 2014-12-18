@@ -3,7 +3,7 @@
   /**
    *  ApiHandler handles login and list articles 
    *  procedure of web API in happyou.info.
-   *  @Author shogo.okamoto(info@zaisoft.com)
+   *  @Author shogo okamoto(info@zaisoft.com)
   */
 class ApiHandler {
 

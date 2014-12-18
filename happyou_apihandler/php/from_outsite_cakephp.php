@@ -36,7 +36,6 @@ $articles = $articleModel->find('all', $params);
 ob_end_clean();//end of suppressing
 
 //echo "---\n";
-//echo $articleModel->dummy();
 echo "count:".count($articles);
 foreach($articles as $a) {
   echo $a['Article']['orgname'].":".$a['Article']['title']."\n";

@@ -21,6 +21,7 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 
 import com.zaisoft.happyouapi_v1.model.Articles;
+import com.zaisoft.happyouapi_v1.model.RieNs;
 
 /**
  * login happyou api with password, send query, get results.
@@ -98,7 +99,13 @@ public class ApiHandler {
 			Articles articles = s.listArticles(query);
 
 			articles.articles.forEach(ar -> {
-				System.out.println(ar.Article.title);
+				System.out.println(ar.Article.frozenDate + " " + ar.Article.title);
+				System.out.println("\ttag:" + ar.Article.tagline);
+				if (ar.ns != null) {
+					for (RieNs riens : ar.ns) {
+						System.out.println("\tns:" + riens.nstitle);
+					}
+				}
 			});
 
 		} catch (Exception ex) {
@@ -219,6 +226,7 @@ public class ApiHandler {
 
 	/**
 	 * create query from parameter list
+	 * 
 	 * @param data
 	 * @param encodeManually
 	 * @return
@@ -447,8 +455,7 @@ public class ApiHandler {
 	}
 
 	/**
-	 * remove some character from head and tail.
-	 * "hoge"->hoge
+	 * remove some character from head and tail. "hoge"->hoge
 	 * 
 	 * @param s
 	 * @return

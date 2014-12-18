@@ -16,6 +16,10 @@ public class RieNs {
 	public long rieid;
 	// nsid(=namespacetitlehash)
 	public int ns;
+
+	// nstitle
+	public String nstitle;
+
 	// news value
 	public int val;
 	// date of article
