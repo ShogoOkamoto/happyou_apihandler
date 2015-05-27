@@ -34,22 +34,26 @@ public class ApiHandler {
 	/**
 	 * path to login dialog
 	 */
-	public static final String PATH2LOGIN = "https://zaisoft.sakura.ne.jp/happyou/webappv1/authake/user/login";
+	public static final String PATH2LOGIN_OLD = "https://zaisoft.sakura.ne.jp/happyou/webappv1/authake/user/login";
+	public static final String PATH2LOGIN = "https://happyou.info/webappv1/authake/user/login";
 
 	/**
 	 * toppage of api
 	 */
-	public static final String PATH2API_TOPPAGE = "https://zaisoft.sakura.ne.jp/happyou/webappv1/index.php";
+	public static final String PATH2API_TOPPAGE_OLD= "https://zaisoft.sakura.ne.jp/happyou/webappv1/index.php";
+	public static final String PATH2API_TOPPAGE = "https://happyou.info/webappv1/";
 
 	/**
 	 * path to json response
 	 */
-	public static final String PATH2API_JSON = "https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.json";
+	public static final String PATH2API_JSON_OLD = "https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.json";
+	public static final String PATH2API_JSON = "https://happyou.info/webappv1/api/index.json";
 
 	/**
 	 * path to rss response
 	 */
-	public static final String PATH2API_RSS = "https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.rss";
+	public static final String PATH2API_RSS_OLD = "https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.rss";
+	public static final String PATH2API_RSS = "https://happyou.info/webappv1/api/index.rss";
 
 	/**
 	 * username to login
@@ -311,8 +315,8 @@ public class ApiHandler {
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			connection.setRequestProperty("Content-Length", query.length() + "");
 			connection.setRequestProperty("Cache-Control", "max-age=0");
-			connection.setRequestProperty("Origin", "https://zaisoft.sakura.ne.jp");
-			connection.setRequestProperty("Referer", "https://zaisoft.sakura.ne.jp/happyou/webappv1/authake/user/login");
+			connection.setRequestProperty("Origin", "https://happyou.info");
+			connection.setRequestProperty("Referer", "https://happyou.info/webappv1/authake/user/login");
 
 			if (cookie.size() > 0) {
 				for (String c : cookie) {

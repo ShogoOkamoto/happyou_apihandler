@@ -38,7 +38,8 @@ public class ApiHandlerTest {
 		try {
 			h.login();
 			Articles articles = h.listArticles(Arrays.asList(new String[] { "pubdatelast=1000" }));
-			articles.articles.forEach(ar -> {
+			articles.articles.forEach(ar ->
+			{
 				System.out.println(ar.Article.title);
 			});
 
