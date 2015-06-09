@@ -7,12 +7,6 @@
   */
 class ApiHandler {
 
-	//old version
-  //const PATH2LOGIN='https://zaisoft.sakura.ne.jp/happyou/webappv1/authake/user/login';
-  //const PATH2API_TOPPAGE="https://zaisoft.sakura.ne.jp/happyou/webappv1/index.php";
-  //const PATH2API_JSON="https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.json";
-  //const PATH2API_RSS="https://zaisoft.sakura.ne.jp/happyou/webappv1/api/index.rss";
-
   const PATH2LOGIN='https://happyou.info/webappv1/authake/user/login';
   const PATH2API_TOPPAGE="https://happyou.info/webappv1/";
   const PATH2API_JSON="https://happyou.info/webappv1/api/index.json";

@@ -37,7 +37,7 @@ public class ApiHandlerTest {
 		ApiHandler h = new ApiHandler(email, password);
 		try {
 			h.login();
-			Articles articles = h.listArticles(Arrays.asList(new String[] { "pubdatelast=1000" }));
+			Articles articles = h.listArticlesByPost(Arrays.asList(new String[] { "pubdatelast=1000" }));
 			articles.articles.forEach(ar ->
 			{
 				System.out.println(ar.Article.title);
