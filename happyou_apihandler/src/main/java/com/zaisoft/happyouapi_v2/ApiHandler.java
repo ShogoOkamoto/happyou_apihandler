@@ -1,4 +1,4 @@
-package com.zaisoft.happyouapi_v1;
+package com.zaisoft.happyouapi_v2;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -12,8 +12,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 import net.arnx.jsonic.JSON;
 
-import com.zaisoft.happyouapi_v1.model.Articles;
-import com.zaisoft.happyouapi_v1.model.RieNs;
+import com.zaisoft.happyouapi_v2.model.Articles;
+import com.zaisoft.happyouapi_v2.model.RieNs;
 
 /**
  * login happyou api with password, send query, get results.
@@ -24,36 +24,29 @@ import com.zaisoft.happyouapi_v1.model.RieNs;
 public class ApiHandler {
 
 	/**
-	 * path to login dialog
-	 */
-	public static final String PATH2LOGIN = "https://happyou.info/webappv1/authake/user/login";
-
-	/**
 	 * toppage of api
 	 */
-	public static final String PATH2API_TOPPAGE = "https://happyou.info/webappv1/";
+	public static final String PATH2API_TOPPAGE = "https://happyou.info/webapp2/";
 
 	/**
 	 * path to json response
 	 */
-	public static final String PATH2API_JSON = "https://happyou.info/webappv1/api/index.json";
+	public static final String PATH2API_JSON = "https://happyou.info/webapp2/api2/index.json";
 
 	/**
 	 * path to rss response
 	 */
-	public static final String PATH2API_RSS = "https://happyou.info/webappv1/api/index.rss";
+	public static final String PATH2API_RSS = "https://happyou.info/webapp2/api2/index.rss";
 
-	public LoginHandler loginHandler;
+	public String app_id;
 
 	/**
 	 * 
-	 * @param user
-	 *            username to login
-	 * @param pass
-	 *            password to login
+	 * @param appid
+	 *            application id
 	 */
-	public ApiHandler(String user, String pass) {
-		this.loginHandler = new LoginHandler(user, pass);
+	public ApiHandler(String app_id) {
+		this.app_id = app_id;
 	}
 
 	/**
@@ -63,24 +56,16 @@ public class ApiHandler {
 
 		try {
 
-			String username = args[0];
-			String password = args[1];
+			String app_id = args[0];
 
-			ApiHandler s = new ApiHandler(username, password);
+			ApiHandler s = new ApiHandler(app_id);
 
-			// First, you have to login with SSL
-			s.login();
-
-			// After login, you can access protected area, api and so on.
 			List<String> query = new ArrayList<>();
-			query.add("pubdatelast=25600");
-			query.add("count=1000");
+			query.add("pubdatelast=100");
+			query.add("count=100");
 
 			// get articles by 'get'
 			Articles articles = s.listArticlesByGet(query);
-
-			// Or get articles by 'post' whatever...
-			// Articles articles = s.listArticlesByPost(query);
 
 			articles.articles.forEach(ar -> {
 				System.out.println(ar.Article.frozenDate + " " + ar.Article.title);
@@ -91,16 +76,18 @@ public class ApiHandler {
 					}
 				}
 			});
+			
+			System.out.println("errid:"+articles.errorid);
+			System.out.println("errmes:"+articles.errormes);
+			
+			
+			
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
 		System.exit(0);
-	}
-
-	public void login() throws Exception {
-		this.loginHandler.login();
 	}
 
 	/**
@@ -111,10 +98,6 @@ public class ApiHandler {
 	 * @throws Exception
 	 */
 	public Articles listArticlesByPost(List<String> query) throws Exception {
-
-		if (loginHandler.getRetrievedCookie() == null) {
-			throw new NullPointerException("You have to login() first.");
-		}
 
 		String jsonResult = this.sendPostQuery(query);
 
@@ -133,17 +116,22 @@ public class ApiHandler {
 	 */
 	public Articles listArticlesByGet(List<String> query) throws Exception {
 
-		if (loginHandler.getRetrievedCookie() == null) {
-			throw new NullPointerException("You have to login() first.");
-		}
-
 		String url = PATH2API_JSON + "?" + createQuery2str(query, false);
 
 		// download
 		String jsonResult = sendGetQuery(url);
 
+		//jsonResult ="{\"articles\":[]}";
+
+		//jsonResult ="{\"articles\":[], \"errorid\":\"myid\"}";
+		
+		
+		System.out.println(jsonResult);
+
 		// convert jsonresult to articles;
-		Articles articles = (Articles) JSON.decode(jsonResult, Articles.class);
+		Object json = JSON.decode(jsonResult, Articles.class);
+
+		Articles articles = (Articles) json;
 
 		return articles;
 	}
@@ -164,23 +152,6 @@ public class ApiHandler {
 
 			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
-
-			if (loginHandler.getRetrievedCookie() != null) {
-				// make them to one line...
-				StringBuffer sb = new StringBuffer();
-				for (String c : loginHandler.getRetrievedCookie()) {
-					if (sb.length() > 0) {
-						sb.append("; ");
-					}
-					sb.append(c);
-				}
-				String cookieLine = sb.toString();
-
-				// remove after";"
-				cookieLine = cookieLine.split(";", 2)[0];
-
-				connection.addRequestProperty("Cookie", cookieLine);
-			}
 
 			connection.connect();
 
@@ -205,7 +176,6 @@ public class ApiHandler {
 				}
 
 			} else {
-
 				StringBuffer buffer = new StringBuffer();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				reader.lines().forEach(l -> buffer.append(l));
@@ -245,22 +215,6 @@ public class ApiHandler {
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			connection.setRequestProperty("Content-Length", Integer.toString(queryBytes.length));
 
-			if (loginHandler.getRetrievedCookie() != null) {
-				// make them to one line...
-				StringBuffer sb = new StringBuffer();
-				for (String c : loginHandler.getRetrievedCookie()) {
-					if (sb.length() > 0) {
-						sb.append("; ");
-					}
-					sb.append(c);
-				}
-				String cookieLine = sb.toString();
-
-				cookieLine = cookieLine.split(";", 2)[0];
-
-				connection.addRequestProperty("Cookie", cookieLine);
-			}
-
 			// post query..
 			DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
 			dos.write(createQuery2str(query, false).getBytes("utf-8"));
@@ -268,6 +222,7 @@ public class ApiHandler {
 			dos.close();
 
 			int responseCode = connection.getResponseCode();
+
 			if (responseCode == 200) {
 				// read body...
 				StringBuffer buffer = new StringBuffer();
@@ -288,7 +243,6 @@ public class ApiHandler {
 				}
 
 			} else {
-
 				StringBuffer buffer = new StringBuffer();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				reader.lines().forEach(l -> buffer.append(l));
@@ -313,6 +267,9 @@ public class ApiHandler {
 	private String createQuery2str(List<String> data, boolean encodeManually) {
 
 		StringBuffer sb = new StringBuffer();
+
+		sb.append("app_id=" + this.app_id + "&");
+
 		for (int i = 0; i < data.size(); i++) {
 			if (data.get(i) != null) {
 				String s = data.get(i).toString();

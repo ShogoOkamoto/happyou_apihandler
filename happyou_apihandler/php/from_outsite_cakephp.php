@@ -7,7 +7,7 @@ Send query and retrieve articles of happyou.info.
 <?php
 
   ob_start();//suppress messages.
-
+;
 // load cakePHP classes.
 require_once ('../webappv1/index.php');
 

@@ -113,13 +113,11 @@ public class LoginHandler {
 			// Third, read response after submitting a form
 			//
 			int responseCode = connection.getResponseCode();
-			String responseMes = connection.getResponseMessage();
+
 			Map<String, List<String>> headers = connection.getHeaderFields();
 			// read headers
 			for (String key : headers.keySet()) {
-				List<String> lines = headers.get(key);
 				if (key != null) {
-
 					if (key.equalsIgnoreCase("Location")) {
 						targeturl = new URL(headers.get("Location").get(0));
 					}

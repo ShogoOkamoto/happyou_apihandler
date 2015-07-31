@@ -1,0 +1,50 @@
+package com.zaisoft.happyouapi_v2;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import com.zaisoft.happyouapi_v2.model.Articles;
+
+@RunWith(Parameterized.class)
+public class ApiHandlerTest {
+
+	String appid;
+
+	public ApiHandlerTest(String appid) {
+		this.appid = appid;
+	}
+
+	@Parameters
+	public static List<Object[]> testData() {
+		Object[][] data = new String[][] { { "your_app_id_here" } };
+
+		return Arrays.asList(data);
+	}
+
+	@Test
+	public void testListArticles() {
+
+		ApiHandler h = new ApiHandler(appid);
+		try {
+
+			Articles articles = h.listArticlesByPost(Arrays.asList(new String[] { "pubdatelast=1000" }));
+			articles.articles.forEach(ar -> {
+				System.out.println(ar.Article.title);
+			});
+
+			assertEquals(true, articles.articles.size() > 0);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fail("failed by some exception");
+		}
+	}
+}
