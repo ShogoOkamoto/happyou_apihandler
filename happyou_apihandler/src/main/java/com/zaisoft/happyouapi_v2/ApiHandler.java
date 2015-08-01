@@ -24,11 +24,6 @@ import com.zaisoft.happyouapi_v2.model.RieNs;
 public class ApiHandler {
 
 	/**
-	 * toppage of api
-	 */
-	public static final String PATH2API_TOPPAGE = "https://happyou.info/webapp2/";
-
-	/**
 	 * path to json response
 	 */
 	public static final String PATH2API_JSON = "https://happyou.info/webapp2/api2/index.json";
@@ -79,9 +74,6 @@ public class ApiHandler {
 			
 			System.out.println("errid:"+articles.errorid);
 			System.out.println("errmes:"+articles.errormes);
-			
-			
-			
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -121,11 +113,6 @@ public class ApiHandler {
 		// download
 		String jsonResult = sendGetQuery(url);
 
-		//jsonResult ="{\"articles\":[]}";
-
-		//jsonResult ="{\"articles\":[], \"errorid\":\"myid\"}";
-		
-		
 		System.out.println(jsonResult);
 
 		// convert jsonresult to articles;
@@ -137,7 +124,7 @@ public class ApiHandler {
 	}
 
 	/**
-	 * send query after login, and get json result.
+	 * send query and get json result.
 	 * 
 	 * @param url
 	 * @param cookie
@@ -191,7 +178,7 @@ public class ApiHandler {
 	}
 
 	/**
-	 * send query after login, and get json result.
+	 * send query and get json result.
 	 * 
 	 * @param url
 	 * @param cookie
