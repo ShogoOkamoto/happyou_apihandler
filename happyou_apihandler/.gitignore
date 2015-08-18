@@ -1,12 +1,6 @@
 /bin/
-
 /lib/
-
 /build/
-
-/.gralde/
-
-
-
-
 /.gradle/
+/.classpath
+/.settings/
