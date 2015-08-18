@@ -57,7 +57,7 @@ public class ApiHandler {
 
 			List<String> query = new ArrayList<>();
 			query.add("pubdatelast=100");
-			query.add("count=100");
+			query.add("count=10");
 
 			// get articles by 'get'
 			Articles articles = s.listArticlesByGet(query);
@@ -71,9 +71,9 @@ public class ApiHandler {
 					}
 				}
 			});
-			
-			System.out.println("errid:"+articles.errorid);
-			System.out.println("errmes:"+articles.errormes);
+
+			System.out.println("errid:" + articles.errorid);
+			System.out.println("errmes:" + articles.errormes);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -112,8 +112,6 @@ public class ApiHandler {
 
 		// download
 		String jsonResult = sendGetQuery(url);
-
-		System.out.println(jsonResult);
 
 		// convert jsonresult to articles;
 		Object json = JSON.decode(jsonResult, Articles.class);
@@ -166,7 +164,6 @@ public class ApiHandler {
 				StringBuffer buffer = new StringBuffer();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				reader.lines().forEach(l -> buffer.append(l));
-				System.out.println(buffer.toString());
 				return null;
 			}
 
@@ -233,7 +230,7 @@ public class ApiHandler {
 				StringBuffer buffer = new StringBuffer();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				reader.lines().forEach(l -> buffer.append(l));
-				System.out.println(buffer.toString());
+
 				return null;
 			}
 

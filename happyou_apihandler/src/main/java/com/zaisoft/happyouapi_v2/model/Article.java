@@ -32,6 +32,8 @@ public class Article {
 
 	private transient String stringexpression;
 
+	public transient boolean deletable;
+	
 	public String toString() {
 
 		if (stringexpression != null) {

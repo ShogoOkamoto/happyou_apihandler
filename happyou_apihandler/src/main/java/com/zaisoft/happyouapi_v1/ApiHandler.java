@@ -73,8 +73,8 @@ public class ApiHandler {
 
 			// After login, you can access protected area, api and so on.
 			List<String> query = new ArrayList<>();
-			query.add("pubdatelast=25600");
-			query.add("count=1000");
+			query.add("pubdatelast=100");
+			query.add("count=10");
 
 			// get articles by 'get'
 			Articles articles = s.listArticlesByGet(query);
