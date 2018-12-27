@@ -37,7 +37,7 @@ public class ApiHandler {
 
 	/**
 	 * 
-	 * @param appid
+	 * @param app_id
 	 *            application id
 	 */
 	public ApiHandler(String app_id) {
@@ -124,8 +124,7 @@ public class ApiHandler {
 	/**
 	 * send query and get json result.
 	 * 
-	 * @param url
-	 * @param cookie
+	 * @param urlstr
 	 * @return
 	 * @throws Exception
 	 */
@@ -177,8 +176,7 @@ public class ApiHandler {
 	/**
 	 * send query and get json result.
 	 * 
-	 * @param url
-	 * @param cookie
+	 * @param query
 	 * @return
 	 * @throws Exception
 	 */
