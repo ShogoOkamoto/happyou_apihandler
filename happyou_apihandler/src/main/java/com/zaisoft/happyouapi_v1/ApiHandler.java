@@ -21,6 +21,7 @@ import com.zaisoft.happyouapi_v1.model.RieNs;
  * @author shogo
  *
  */
+@Deprecated
 public class ApiHandler {
 
 	/**

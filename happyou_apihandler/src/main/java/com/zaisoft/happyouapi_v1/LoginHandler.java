@@ -24,6 +24,7 @@ import net.htmlparser.jericho.Source;
  * @author shogo
  *
  */
+@Deprecated
 public class LoginHandler {
 
 	/**

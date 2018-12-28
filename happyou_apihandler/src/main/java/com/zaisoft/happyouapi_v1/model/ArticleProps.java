@@ -9,6 +9,7 @@ import java.util.Date;
  * @author shogo
  * 
  */
+@Deprecated
 public class ArticleProps {
 
 	/**

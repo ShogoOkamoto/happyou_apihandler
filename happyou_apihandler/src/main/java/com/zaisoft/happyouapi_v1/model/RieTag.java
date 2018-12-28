@@ -6,6 +6,7 @@ package com.zaisoft.happyouapi_v1.model;
  * @author shogo
  * 
  */
+@Deprecated
 public class RieTag {
 
 	// id of this object

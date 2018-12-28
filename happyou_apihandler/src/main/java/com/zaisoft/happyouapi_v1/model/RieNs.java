@@ -8,7 +8,7 @@ import java.util.Date;
  * @author shogo
  * 
  */
-
+@Deprecated
 public class RieNs {
 	// id in server
 	public long id;

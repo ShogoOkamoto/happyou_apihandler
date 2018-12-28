@@ -107,8 +107,18 @@ public class ApiHandler {
 	 * @throws Exception
 	 */
 	public Articles listArticlesByGet(List<String> query) throws Exception {
+		return listArticlesByGet(createQuery2str(query, false));
+	}
+	/**
+	 * Send query to retrive articles
+	 *
+	 * @param query
+	 * @return
+	 * @throws Exception
+	 */
+	public Articles listArticlesByGet(String query) throws Exception {
 
-		String url = PATH2API_JSON + "?" + createQuery2str(query, false);
+		String url = PATH2API_JSON + "?" + query;
 
 		// download
 		String jsonResult = sendGetQuery(url);
@@ -120,7 +130,6 @@ public class ApiHandler {
 
 		return articles;
 	}
-
 	/**
 	 * send query and get json result.
 	 * 

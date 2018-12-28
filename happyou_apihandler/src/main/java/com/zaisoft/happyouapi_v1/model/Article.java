@@ -13,6 +13,7 @@ import java.util.List;
  * @author shogo
  * 
  */
+@Deprecated
 public class Article {
 
 	/**

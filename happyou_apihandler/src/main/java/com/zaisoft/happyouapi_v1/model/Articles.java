@@ -14,6 +14,7 @@ import java.util.List;
  * @author shogo
  * 
  */
+@Deprecated
 public class Articles {
 
 	public List<Article> articles;
